@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 class Router {
     constructor(){
         this._pageControllers = [];
@@ -41,6 +42,50 @@ class Router {
         }
     }
     }
+=======
+class Router {
+    constructor(){
+        this._pageControllers = [];
+        this.init();
+    }
+
+    init(){
+        window.onpopstate = function(){
+            router.routeControllers(document.location.pathname);
+        }
+    }
+
+    addPageController(pageController){
+        this._pageControllers.push(pageController);
+    }
+    
+    route(url){
+        window.event.preventDefault();
+        this._route(url);
+        // url= url? url: (window.event.target.href ? window.event.target.href: document.location.pathname);
+        // window.history.pushState(window.history.state, '', url);
+        // this.routeControllers(url);
+    }
+    _route(url){
+        //window.event.preventDefault();
+        url= url? url: (window.event.target.href ? window.event.target.href: document.location.pathname);
+        window.history.pushState(window.history.state, '', url);
+        this.routeControllers(url);
+    }
+
+
+    routeControllers(url){
+    let i= 0;
+    let result;
+    while(i< this._pageControllers.length){
+        if(result=this._pageControllers[i].router(url)){
+            i=this._pageControllers.length
+        }else{
+            i++
+        }
+    }
+    }
+>>>>>>> 3154d23f6718c3b6cd93b7439093839fe3c1b81c
 =======
 class Router {
     constructor(){
